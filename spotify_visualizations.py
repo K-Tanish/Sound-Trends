@@ -13,6 +13,7 @@ import functools
 import http.server
 import socketserver
 import webbrowser
+import json
 from pathlib import Path
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
@@ -58,6 +59,121 @@ FOCUS_GENRES = ["pop", "hip-hop", "rock", "jazz",
 df_focus = df[df["track_genre"].isin(FOCUS_GENRES)].copy()
 
 print(f"Dataset: {len(df):,} tracks | {df['track_genre'].nunique()} genres")
+
+
+def export_dashboard_data():
+    corr_cols = AUDIO_FEATURES + ["popularity", "tempo", "loudness"]
+    corr_df = df[corr_cols].corr().round(3)
+    corr_labels = corr_df.columns.tolist()
+    corr_matrix = corr_df.values.tolist()
+
+    # Chart 1: danceability vs popularity (sampled, by genre)
+    scatter_parts = []
+    for _, grp in df_focus.groupby("track_genre"):
+        scatter_parts.append(grp.sample(min(800, len(grp)), random_state=42))
+    scatter_sample = pd.concat(scatter_parts, ignore_index=True)
+    scatter_cols = ["track_name", "artists", "track_genre", "danceability", "popularity", "valence", "energy"]
+    scatter_data = scatter_sample[scatter_cols].to_dict(orient="records")
+
+    # Chart 2: top vs bottom quartile feature profile within each genre
+    compare_features = ["danceability", "energy", "valence", "acousticness", "speechiness", "instrumentalness"]
+    sound_success = {"features": compare_features, "genres": FOCUS_GENRES, "top": {}, "bottom": {}, "delta": {}}
+    for genre, grp in df_focus.groupby("track_genre"):
+        if genre not in FOCUS_GENRES:
+            continue
+        q25 = grp["popularity"].quantile(0.25)
+        q75 = grp["popularity"].quantile(0.75)
+        bot = grp[grp["popularity"] <= q25]
+        top = grp[grp["popularity"] >= q75]
+        top_mean = top[compare_features].mean().fillna(0)
+        bot_mean = bot[compare_features].mean().fillna(0)
+        sound_success["top"][genre] = {f: round(float(top_mean[f]), 4) for f in compare_features}
+        sound_success["bottom"][genre] = {f: round(float(bot_mean[f]), 4) for f in compare_features}
+        sound_success["delta"][genre] = {f: round(float(top_mean[f] - bot_mean[f]), 4) for f in compare_features}
+
+    # Chart 3: mood paradox via popularity quartiles -> valence distributions
+    mood = {"top_valence": {}, "bottom_valence": {}, "low_vs_high_popularity": {}}
+    low_vs_high = {}
+    for genre, grp in df_focus.groupby("track_genre"):
+        if genre not in FOCUS_GENRES:
+            continue
+        q25 = grp["popularity"].quantile(0.25)
+        q75 = grp["popularity"].quantile(0.75)
+        bot = grp.loc[grp["popularity"] <= q25, "valence"].dropna()
+        top = grp.loc[grp["popularity"] >= q75, "valence"].dropna()
+        mood["bottom_valence"][genre] = [round(float(v), 4) for v in bot.tolist()]
+        mood["top_valence"][genre] = [round(float(v), 4) for v in top.tolist()]
+
+        low_val = grp[grp["valence"] <= 0.4]["popularity"].mean()
+        high_val = grp[grp["valence"] >= 0.6]["popularity"].mean()
+        low_vs_high[genre] = {
+            "low_valence_pop": round(float(low_val), 2) if pd.notna(low_val) else None,
+            "high_valence_pop": round(float(high_val), 2) if pd.notna(high_val) else None,
+            "difference": round(float(low_val - high_val), 2) if pd.notna(low_val) and pd.notna(high_val) else None,
+        }
+    mood["low_vs_high_popularity"] = low_vs_high
+
+    # Chart 4: PCA genre identity map
+    pca_features = AUDIO_FEATURES
+    parts = [grp.sample(min(500, len(grp)), random_state=42) for _, grp in df_focus.groupby("track_genre")]
+    pca_sample = pd.concat(parts, ignore_index=True).copy()
+    X = StandardScaler().fit_transform(pca_sample[pca_features])
+    pca = PCA(n_components=2, random_state=42)
+    coords = pca.fit_transform(X)
+    pca_sample["PC1"] = coords[:, 0]
+    pca_sample["PC2"] = coords[:, 1]
+    ev = pca.explained_variance_ratio_
+    pca_points = pca_sample[["track_genre", "PC1", "PC2"]].to_dict(orient="records")
+
+    # Conclusion metrics
+    dance_pop_corr = float(df["danceability"].corr(df["popularity"]))
+    strongest_pair = ("n/a", "n/a", 0.0)
+    for i, a in enumerate(corr_labels):
+        for j, b in enumerate(corr_labels):
+            if j <= i:
+                continue
+            v = abs(corr_matrix[i][j])
+            if v > strongest_pair[2]:
+                strongest_pair = (a, b, v)
+
+    genre_centroids = pca_sample.groupby("track_genre")[["PC1", "PC2"]].mean()
+    centroid = genre_centroids.mean()
+    distances = ((genre_centroids["PC1"] - centroid["PC1"]) ** 2 + (genre_centroids["PC2"] - centroid["PC2"]) ** 2) ** 0.5
+    most_isolated = distances.sort_values(ascending=False).index[0]
+
+    payload = {
+        "kpi": {
+            "total": int(len(df)),
+            "genres": int(df["track_genre"].nunique()),
+            "avg_pop": round(float(df["popularity"].mean()), 1),
+            "explicit_pct": round(float(df["explicit"].mean() * 100), 1),
+        },
+        "focus_genres": FOCUS_GENRES,
+        "scatter_myth": scatter_data,
+        "sound_success": sound_success,
+        "mood": mood,
+        "corr": {
+            "labels": corr_labels,
+            "matrix": corr_matrix,
+        },
+        "pca": {
+            "ev": [float(ev[0]), float(ev[1])],
+            "points": pca_points,
+        },
+        "conclusion": {
+            "danceability_corr": round(dance_pop_corr, 3),
+            "strongest_pair": {
+                "a": strongest_pair[0],
+                "b": strongest_pair[1],
+                "abs_corr": round(float(strongest_pair[2]), 3),
+            },
+            "most_isolated_genre": most_isolated,
+        },
+    }
+
+    out_js = OUTPUT_DIR / "dashboard_data.js"
+    out_js.write_text("window.DASH_DATA = " + json.dumps(payload, separators=(",", ":")) + ";", encoding="utf-8")
+    print("[OK] dashboard_data.js saved")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -453,6 +569,7 @@ if __name__ == "__main__":
     viz6_genre_popularity_bars()
     viz7_plotly_bubble()
     viz8_explicit_popularity()
+    export_dashboard_data()
     print(f"\n[OK] All 8 visualizations saved to {OUTPUT_DIR}/")
 
     if args.serve:

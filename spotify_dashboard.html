@@ -173,12 +173,36 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
     </div>
   </div>
 
-  <!-- Row 1: Heatmap + Radar -->
+  <!-- Row 1: Popularity Myth + Sound of Success -->
   <div class="grid-2">
     <div class="card">
       <div class="section-header">
+        <div class="section-title">The Popularity Myth</div>
+        <div class="section-tag">CHART 1</div>
+        <div class="section-note">Danceability vs Popularity</div>
+      </div>
+      <div class="card-sub">Assumption check: danceable tracks are not automatically more popular</div>
+      <div id="myth-wrap" style="position:relative;height:300px;"></div>
+      <div class="legend-row" id="myth-legend"></div>
+    </div>
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">The Sound of Success</div>
+        <div class="section-tag">CHART 2</div>
+      </div>
+      <div class="card-sub">Top 25% vs Bottom 25% tracks in each genre — feature differences that separate hits from flops</div>
+      <div class="chart-wrap" style="height:300px;">
+        <canvas id="success-bar-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Mood Paradox + Identity Map -->
+  <div class="grid-3">
+    <div class="card">
+      <div class="section-header">
         <div class="section-title">Feature Correlation Heatmap</div>
-        <div class="section-tag">UNIT III</div>
+        <div class="section-tag">CHART 3</div>
         <div class="section-note">Pearson r</div>
       </div>
       <div class="card-sub">How audio features relate to each other and to popularity</div>
@@ -186,107 +210,36 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
     </div>
     <div class="card">
       <div class="section-header">
-        <div class="section-title">Genre Audio Fingerprints</div>
-        <div class="section-tag">UNIT IV</div>
+        <div class="section-title">Genre Identity Map</div>
+        <div class="section-tag">CHART 4</div>
       </div>
-      <div class="card-sub">Radar — each axis is a normalised audio feature (0→1)</div>
-      <div class="genre-filters" id="radar-filters"></div>
-      <div id="radar-wrap" style="position:relative;height:280px;"></div>
-      <div class="legend-row" id="radar-legend"></div>
-    </div>
-  </div>
-
-  <!-- Row 2: Violin + Scatter -->
-  <div class="grid-3">
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Danceability vs Energy</div>
-        <div class="section-tag">UNIT III</div>
-        <div class="section-note">bubble size = popularity</div>
-      </div>
-      <div class="card-sub">Each point is a sampled track — hover for details</div>
-      <div class="genre-filters" id="scatter-filters"></div>
-      <div id="scatter-wrap" style="position:relative;height:300px;"></div>
-      <div class="legend-row" id="scatter-legend"></div>
-    </div>
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Mood Distribution</div>
-        <div class="section-tag">UNIT IV</div>
-      </div>
-      <div class="card-sub">Valence violin plot — 0 = sad → 1 = happy</div>
-      <div id="violin-wrap" style="position:relative;"></div>
-    </div>
-  </div>
-
-  <!-- Row 3: PCA + Genre Bars -->
-  <div class="grid-2">
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">PCA + K-Means Cluster Map</div>
-        <div class="section-tag">UNIT V</div>
-      </div>
-      <div class="card-sub" id="pca-sub">Genre clusters in 2D — K-Means (k=8) on 7 audio features</div>
+      <div class="card-sub" id="pca-sub">Which genres cluster together acoustically, and which stand alone</div>
       <div id="pca-wrap" style="position:relative;height:320px;"></div>
       <div class="legend-row" id="pca-legend"></div>
     </div>
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Genre Feature Comparison</div>
-        <div class="section-tag">UNIT III + VI</div>
-      </div>
-      <div class="card-sub">Avg danceability, energy, valence and acousticness by genre</div>
-      <div class="chart-wrap" style="height:300px;">
-        <canvas id="feat-bar-chart"></canvas>
-      </div>
-    </div>
   </div>
 
-  <!-- Row 4: Popularity + Explicit -->
-  <div class="grid-2">
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Avg Popularity by Genre</div>
-        <div class="section-tag">UNIT VI</div>
-      </div>
-      <div class="card-sub">Business metric — which genres have the highest stream potential</div>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="pop-bar-chart"></canvas>
-      </div>
-    </div>
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Explicit vs Clean Popularity</div>
-        <div class="section-tag">UNIT III</div>
-      </div>
-      <div class="card-sub">Popularity density + explicit rate % per genre</div>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="explicit-chart"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- Insight cards -->
+  <!-- Conclusion cards -->
   <div class="section-header" style="margin-bottom:1rem;">
-    <div class="section-title">Key Business Insights</div>
-    <div class="section-tag">UNIT VI</div>
+    <div class="section-title">Conclusions</div>
+    <div class="section-tag">STORY TAKEAWAYS</div>
   </div>
   <div class="insights-grid">
     <div class="insight-card" style="--ins-color:var(--g0)">
-      <div class="insight-num">↑ Energy</div>
-      <div class="insight-text">Energy & loudness are the strongest correlated pair (r ≈ 0.76), confirming modern production drives perceived intensity.</div>
+      <div class="insight-num" id="c1-title">Danceability Myth</div>
+      <div class="insight-text" id="c1-text"></div>
     </div>
     <div class="insight-card" style="--ins-color:var(--g3)">
-      <div class="insight-num">Classical ≠ Pop</div>
-      <div class="insight-text">Classical sits as a fully isolated cluster in PCA space — the most acoustically distinct genre with lowest energy (0.20) and highest acousticness (0.92).</div>
+      <div class="insight-num" id="c2-title">Success Signature</div>
+      <div class="insight-text" id="c2-text"></div>
     </div>
     <div class="insight-card" style="--ins-color:var(--g2)">
-      <div class="insight-num">Dance ≠ Popular</div>
-      <div class="insight-text">Danceability has a near-zero correlation with popularity. Metal, despite low danceability, scores the highest avg popularity at 56.4.</div>
+      <div class="insight-num" id="c3-title">Heatmap Reality</div>
+      <div class="insight-text" id="c3-text"></div>
     </div>
     <div class="insight-card" style="--ins-color:var(--g4)">
-      <div class="insight-num">Hip-hop explicit</div>
-      <div class="insight-text">Hip-hop has the highest explicit content rate. Yet explicit tracks, counterintuitively, do not significantly outperform clean tracks in popularity.</div>
+      <div class="insight-num" id="c4-title">Identity Distance</div>
+      <div class="insight-text" id="c4-text"></div>
     </div>
   </div>
 
@@ -301,7 +254,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
 </script>
 <script src="dashboard_data.js"></script>
 <script>
-const GENRES   = ['pop','hip-hop','rock','jazz','classical','electronic','metal','r-n-b'];
+const GENRES   = window.DASH_DATA.focus_genres || ['pop','hip-hop','rock','jazz','classical','electronic','metal','r-n-b'];
 const COLORS   = ['#1ed760','#ff4757','#3498db','#ffa502','#a29bfe','#00cec9','#fd79a8','#55efc4'];
 const gc = {};
 GENRES.forEach((g,i)=>gc[g]=COLORS[i]);
@@ -338,13 +291,110 @@ Chart.defaults.font.family = "'Space Mono', monospace";
 Chart.defaults.font.size = 10;
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 1. HEATMAP (D3)
+// 1. POPULARITY MYTH (Canvas)
+// ═══════════════════════════════════════════════════════════════════════════
+(function buildPopularityMyth(){
+  const points = D.scatter_myth || [];
+  const rl = document.getElementById('myth-legend');
+  GENRES.forEach((g,i)=>{
+    const it=document.createElement('div'); it.className='legend-item';
+    it.innerHTML=`<div class="legend-dot" style="background:${COLORS[i]}"></div>${g}`;
+    rl.appendChild(it);
+  });
+  const wrap=document.getElementById('myth-wrap');
+  const canvas=document.createElement('canvas');
+  canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;';
+  wrap.appendChild(canvas);
+  const PAD={l:40,r:14,t:12,b:30};
+  function draw(){
+    const W=wrap.clientWidth, H=wrap.clientHeight;
+    canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+    const ctx=canvas.getContext('2d'); ctx.scale(devicePixelRatio,devicePixelRatio);
+    ctx.clearRect(0,0,W,H);
+    const pw=W-PAD.l-PAD.r, ph=H-PAD.t-PAD.b;
+    ctx.strokeStyle='#1d2730'; ctx.lineWidth=0.6;
+    [0,0.25,0.5,0.75,1].forEach(v=>{
+      ctx.beginPath(); ctx.moveTo(PAD.l,PAD.t+ph*(1-v)); ctx.lineTo(PAD.l+pw,PAD.t+ph*(1-v)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(PAD.l+pw*v,PAD.t); ctx.lineTo(PAD.l+pw*v,PAD.t+ph); ctx.stroke();
+    });
+    ctx.fillStyle='#5a6a7a'; ctx.font=`9px "Space Mono",monospace`;
+    ctx.fillText('danceability', PAD.l+pw/2-32, H-4);
+    ctx.save(); ctx.translate(12, PAD.t+ph/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('popularity', -20, 0); ctx.restore();
+
+    points.forEach(p=>{
+      const x=PAD.l+p.danceability*pw;
+      const y=PAD.t+ph-(p.popularity/100)*ph;
+      const col=gc[p.track_genre]||'#fff';
+      ctx.beginPath(); ctx.arc(x,y,2.7,0,Math.PI*2);
+      ctx.fillStyle=col+'88'; ctx.fill();
+    });
+  }
+  draw();
+  window.addEventListener('resize', draw);
+  canvas.addEventListener('mousemove', e=>{
+    const rect=canvas.getBoundingClientRect();
+    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+    const W=wrap.clientWidth, H=wrap.clientHeight;
+    const pw=W-PAD.l-PAD.r, ph=H-PAD.t-PAD.b;
+    let found=null, best=Infinity;
+    points.forEach(p=>{
+      const x=PAD.l+p.danceability*pw;
+      const y=PAD.t+ph-(p.popularity/100)*ph;
+      const d=Math.hypot(mx-x,my-y);
+      if(d<16 && d<best){best=d; found=p;}
+    });
+    if(found){
+      showTip(e,`<strong>${found.track_name}</strong><span>${found.artists}</span><br/><span>${found.track_genre} · Popularity: ${found.popularity}</span><br/><span>Danceability: ${found.danceability.toFixed(2)}</span>`);
+    } else hideTip();
+  });
+  canvas.addEventListener('mouseleave', hideTip);
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 2. SOUND OF SUCCESS (Chart.js grouped bars)
+// ═══════════════════════════════════════════════════════════════════════════
+(function buildSuccessSound(){
+  const features = D.sound_success.features;
+  const genres = D.sound_success.genres;
+  const strength = genres.map(g=>{
+    const vals = D.sound_success.delta[g] || {};
+    return (vals.energy||0)+(vals.danceability||0)+(vals.valence||0)-Math.abs(vals.acousticness||0);
+  });
+  const order = genres
+    .map((g,i)=>({g,s:strength[i]}))
+    .sort((a,b)=>b.s-a.s)
+    .map(x=>x.g);
+  const labels = order;
+  const featureWeights = features.map((f,fi)=>({
+    label:f,
+    data:labels.map(g=>((D.sound_success.delta[g]||{})[f]||0)),
+    backgroundColor:(['#1ed760','#ff4757','#ffa502','#3498db','#a29bfe','#00cec9'][fi%6])+'b3',
+    borderWidth:0,
+    borderRadius:2
+  }));
+  new Chart(document.getElementById('success-bar-chart'),{
+    type:'bar',
+    data:{labels,datasets:featureWeights},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#5a6a7a',boxWidth:10,font:{size:9}}}},
+      scales:{
+        x:{ticks:{color:'#5a6a7a',maxRotation:25,minRotation:25},grid:{display:false}},
+        y:{ticks:{color:'#5a6a7a'},grid:{color:'#1d2730'},title:{display:true,text:'Top quartile - Bottom quartile',color:'#5a6a7a'}}
+      }
+    }
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 3. HEATMAP (D3)
 // ═══════════════════════════════════════════════════════════════════════════
 (function buildHeatmap(){
   const labels = D.corr.labels;
   const matrix = D.corr.matrix;
   const n = labels.length;
-  const sz = 36, pad = {top:10,left:90,bottom:90,right:10};
+  const sz = 30, pad = {top:10,left:90,bottom:90,right:10};
   const W = sz*n+pad.left+pad.right;
   const H = sz*n+pad.top+pad.bottom;
 
@@ -359,8 +409,6 @@ Chart.defaults.font.size = 10;
     });
 
   const g = svg.append('g').attr('transform',`translate(${pad.left},${pad.top})`);
-
-  // cells
   labels.forEach((r,i)=>{
     labels.forEach((c,j)=>{
       const v = matrix[i][j];
@@ -370,332 +418,43 @@ Chart.defaults.font.size = 10;
         .attr('rx',2)
         .attr('fill', colorScale(v))
         .style('cursor','pointer');
-
-      // value text (only show if |v|>0.2)
       if(Math.abs(v)>0.2){
         g.append('text')
           .attr('x',j*sz+sz/2).attr('y',i*sz+sz/2+1)
           .attr('text-anchor','middle').attr('dominant-baseline','central')
-          .attr('font-size',8).attr('fill', Math.abs(v)>0.5?'#000':'#fff')
+          .attr('font-size',7).attr('fill', Math.abs(v)>0.5?'#000':'#fff')
           .attr('opacity',0.85)
-          .text(v.toFixed(2));
+          .text(Number(v).toFixed(2));
       }
-
       cell.on('mousemove', e=>{
-        showTip(e,`<strong>${r} × ${c}</strong><span>r = ${v.toFixed(3)}</span>`);
+        showTip(e,`<strong>${r} x ${c}</strong><span>r = ${Number(v).toFixed(3)}</span>`);
       }).on('mouseleave', hideTip);
     });
   });
 
-  // x labels
   labels.forEach((l,i)=>{
     g.append('text')
       .attr('x',i*sz+sz/2).attr('y',n*sz+8)
       .attr('text-anchor','end')
       .attr('transform',`rotate(-40,${i*sz+sz/2},${n*sz+8})`)
-      .attr('font-size',9).attr('fill','#5a6a7a')
+      .attr('font-size',8).attr('fill','#5a6a7a')
       .text(l);
   });
-
-  // y labels
   labels.forEach((l,i)=>{
     g.append('text')
       .attr('x',-6).attr('y',i*sz+sz/2)
       .attr('text-anchor','end').attr('dominant-baseline','central')
-      .attr('font-size',9).attr('fill','#5a6a7a')
+      .attr('font-size',8).attr('fill','#5a6a7a')
       .text(l);
   });
-
-  // color legend bar
-  const lgW=100, lgH=8, lgX=W-pad.left-lgW-10, lgY=H-pad.top-20;
-  const defs = svg.append('defs');
-  const lgGrad = defs.append('linearGradient').attr('id','lg-hm');
-  lgGrad.append('stop').attr('offset','0%').attr('stop-color','#ff4757');
-  lgGrad.append('stop').attr('offset','50%').attr('stop-color','#0e1318');
-  lgGrad.append('stop').attr('offset','100%').attr('stop-color','#1ed760');
-  svg.append('rect').attr('x',pad.left+lgX).attr('y',lgY).attr('width',lgW).attr('height',lgH).attr('rx',3).attr('fill','url(#lg-hm)');
-  svg.append('text').attr('x',pad.left+lgX).attr('y',lgY+lgH+12).attr('font-size',8).attr('fill','#5a6a7a').text('-1.0');
-  svg.append('text').attr('x',pad.left+lgX+lgW).attr('y',lgY+lgH+12).attr('text-anchor','end').attr('font-size',8).attr('fill','#5a6a7a').text('+1.0');
 })();
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 2. RADAR CHART (Canvas)
-// ═══════════════════════════════════════════════════════════════════════════
-(function buildRadar(){
-  const features = ['danceability','energy','speechiness','acousticness','valence','liveness'];
-  let activeGenres = new Set(GENRES);
-
-  // Build filter pills
-  const pf = document.getElementById('radar-filters');
-  GENRES.forEach((g,i)=>{
-    const p = document.createElement('div');
-    p.className='gf-pill active';
-    p.textContent=g;
-    p.style.setProperty('background', activeGenres.has(g)?COLORS[i]:'transparent');
-    p.style.setProperty('color', activeGenres.has(g)?'#000':COLORS[i]);
-    p.style.setProperty('border-color', COLORS[i]);
-    p.addEventListener('click',()=>{
-      if(activeGenres.has(g)){
-        if(activeGenres.size===1) return;
-        activeGenres.delete(g);
-        p.style.background='transparent';
-        p.style.color=COLORS[i];
-        p.classList.remove('active');
-      } else {
-        activeGenres.add(g);
-        p.style.background=COLORS[i];
-        p.style.color='#000';
-        p.classList.add('active');
-      }
-      draw();
-    });
-    pf.appendChild(p);
-  });
-
-  // Legend
-  const rl = document.getElementById('radar-legend');
-  GENRES.forEach((g,i)=>{
-    const it=document.createElement('div'); it.className='legend-item';
-    it.innerHTML=`<div class="legend-dot" style="background:${COLORS[i]}"></div>${g}`;
-    rl.appendChild(it);
-  });
-
-  const wrap = document.getElementById('radar-wrap');
-  const canvas = document.createElement('canvas'); canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;';
-  wrap.appendChild(canvas);
-
-  function draw(){
-    const W=wrap.clientWidth, H=wrap.clientHeight;
-    canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
-    const ctx=canvas.getContext('2d'); ctx.scale(devicePixelRatio,devicePixelRatio);
-    ctx.clearRect(0,0,W,H);
-    const cx=W/2, cy=H/2, r=Math.min(W,H)/2-44;
-    const N=features.length;
-    const angles=features.map((_,i)=>i*(2*Math.PI/N)-Math.PI/2);
-
-    // Grid rings
-    [0.25,0.5,0.75,1].forEach(t=>{
-      ctx.beginPath();
-      angles.forEach((a,i)=>{
-        const x=cx+Math.cos(a)*r*t, y=cy+Math.sin(a)*r*t;
-        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-      });
-      ctx.closePath();
-      ctx.strokeStyle='#1d2730'; ctx.lineWidth=0.8; ctx.stroke();
-    });
-
-    // Spokes
-    angles.forEach(a=>{
-      ctx.beginPath(); ctx.moveTo(cx,cy);
-      ctx.lineTo(cx+Math.cos(a)*r, cy+Math.sin(a)*r);
-      ctx.strokeStyle='#1d2730'; ctx.lineWidth=0.8; ctx.stroke();
-    });
-
-    // Feature labels
-    ctx.font=`9px "Space Mono", monospace`; ctx.fillStyle='#5a6a7a'; ctx.textAlign='center';
-    angles.forEach((a,i)=>{
-      const lx=cx+Math.cos(a)*(r+18), ly=cy+Math.sin(a)*(r+18);
-      ctx.fillText(features[i], lx, ly+3);
-    });
-
-    // Data polygons
-    GENRES.forEach((g,gi)=>{
-      if(!activeGenres.has(g)) return;
-      const vals=D.radar[g];
-      if(!vals) return;
-      ctx.beginPath();
-      angles.forEach((a,i)=>{
-        const x=cx+Math.cos(a)*r*vals[i], y=cy+Math.sin(a)*r*vals[i];
-        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-      });
-      ctx.closePath();
-      ctx.strokeStyle=COLORS[gi]; ctx.lineWidth=2; ctx.stroke();
-      ctx.fillStyle=COLORS[gi]+'18'; ctx.fill();
-    });
-  }
-
-  draw();
-  window.addEventListener('resize', draw);
-})();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 3. SCATTER PLOT (Canvas)
-// ═══════════════════════════════════════════════════════════════════════════
-(function buildScatter(){
-  let activeGenres = new Set(GENRES);
-
-  const pf=document.getElementById('scatter-filters');
-  GENRES.forEach((g,i)=>{
-    const p=document.createElement('div');
-    p.className='gf-pill active';
-    p.textContent=g;
-    p.style.setProperty('background',COLORS[i]);
-    p.style.setProperty('color','#000');
-    p.style.setProperty('border-color',COLORS[i]);
-    p.addEventListener('click',()=>{
-      if(activeGenres.has(g)){
-        if(activeGenres.size===1) return;
-        activeGenres.delete(g);
-        p.style.background='transparent';
-        p.style.color=COLORS[i];
-        p.classList.remove('active');
-      } else {
-        activeGenres.add(g);
-        p.style.background=COLORS[i];
-        p.style.color='#000';
-        p.classList.add('active');
-      }
-      draw();
-    });
-    pf.appendChild(p);
-  });
-
-  const rl=document.getElementById('scatter-legend');
-  GENRES.forEach((g,i)=>{
-    const it=document.createElement('div'); it.className='legend-item';
-    it.innerHTML=`<div class="legend-dot" style="background:${COLORS[i]}"></div>${g}`;
-    rl.appendChild(it);
-  });
-
-  const wrap=document.getElementById('scatter-wrap');
-  const canvas=document.createElement('canvas');
-  canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;';
-  wrap.appendChild(canvas);
-
-  const PAD={l:36,r:16,t:10,b:30};
-
-  function draw(){
-    const W=wrap.clientWidth, H=wrap.clientHeight;
-    canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
-    const ctx=canvas.getContext('2d'); ctx.scale(devicePixelRatio,devicePixelRatio);
-    ctx.clearRect(0,0,W,H);
-    const pw=W-PAD.l-PAD.r, ph=H-PAD.t-PAD.b;
-
-    // Grid
-    ctx.strokeStyle='#1d2730'; ctx.lineWidth=0.6;
-    [0,0.25,0.5,0.75,1].forEach(v=>{
-      ctx.beginPath(); ctx.moveTo(PAD.l,PAD.t+ph*(1-v)); ctx.lineTo(PAD.l+pw,PAD.t+ph*(1-v)); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(PAD.l+pw*v,PAD.t); ctx.lineTo(PAD.l+pw*v,PAD.t+ph); ctx.stroke();
-      ctx.fillStyle='#3a4a5a'; ctx.font=`8px "Space Mono",monospace`;
-      ctx.fillText(v.toFixed(1),PAD.l-26,PAD.t+ph*(1-v)+3);
-      ctx.fillText(v.toFixed(1),PAD.l+pw*v-6,PAD.t+ph+14);
-    });
-
-    // Axes labels
-    ctx.fillStyle='#5a6a7a'; ctx.font=`9px "Space Mono",monospace`;
-    ctx.fillText('danceability', PAD.l+pw/2-30, H-4);
-    ctx.save(); ctx.translate(11, PAD.t+ph/2); ctx.rotate(-Math.PI/2);
-    ctx.fillText('energy', -18, 0); ctx.restore();
-
-    // Points
-    D.scatter.forEach(p=>{
-      if(!activeGenres.has(p.track_genre)) return;
-      const x=PAD.l+p.danceability*pw;
-      const y=PAD.t+ph-p.energy*ph;
-      const rad=Math.max(2.5, p.popularity*0.06+2);
-      const col=gc[p.track_genre]||'#fff';
-      ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2);
-      ctx.fillStyle=col+'99'; ctx.fill();
-    });
-  }
-
-  draw();
-  window.addEventListener('resize', draw);
-
-  // Hover
-  canvas.addEventListener('mousemove', e=>{
-    const rect=canvas.getBoundingClientRect();
-    const mx=e.clientX-rect.left, my=e.clientY-rect.top;
-    const W=wrap.clientWidth, H=wrap.clientHeight;
-    const pw=W-PAD.l-PAD.r, ph=H-PAD.t-PAD.b;
-    let found=null, best=Infinity;
-    D.scatter.forEach(p=>{
-      if(!activeGenres.has(p.track_genre)) return;
-      const x=PAD.l+p.danceability*pw;
-      const y=PAD.t+ph-p.energy*ph;
-      const d=Math.hypot(mx-x,my-y);
-      if(d<18 && d<best){ best=d; found=p; }
-    });
-    if(found){
-      showTip(e,`<strong>${found.track_name}</strong><span>${found.artists}</span><br/><span>Genre: ${found.track_genre} · Pop: ${found.popularity}</span><br/><span>Dance: ${found.danceability.toFixed(2)} · Energy: ${found.energy.toFixed(2)}</span>`);
-    } else hideTip();
-  });
-  canvas.addEventListener('mouseleave', hideTip);
-})();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 4. VIOLIN PLOT (D3)
-// ═══════════════════════════════════════════════════════════════════════════
-(function buildViolin(){
-  const wrap=document.getElementById('violin-wrap');
-  const W=wrap.clientWidth||260;
-  const H=300;
-  const genres=GENRES;
-  const pad={l:10,r:10,t:10,b:30};
-  const bw=Math.floor((W-pad.l-pad.r)/genres.length);
-
-  const svg=d3.select(wrap).append('svg')
-    .attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
-
-  const y=d3.scaleLinear().domain([0,1]).range([H-pad.b,pad.t]);
-  const kde=(kernel,thresholds,data)=>thresholds.map(x=>[x,d3.mean(data,v=>kernel(x-v))]);
-  const epanechnikov=bw=>v=>Math.abs(v/=bw)<1?0.75*(1-v*v)/bw:0;
-
-  genres.forEach((g,i)=>{
-    const data=(D.violin[g]||[]).filter(v=>v!=null);
-    if(!data.length) return;
-    const color=COLORS[i];
-    const cx=pad.l+i*bw+bw/2;
-    const thresholds=d3.range(0,1.01,0.02);
-    const density=kde(epanechnikov(0.07), thresholds, data);
-    const maxD=d3.max(density,d=>d[1])||0.001;
-    const halfW=(bw/2-4);
-    const xScale=v=>v/maxD*halfW;
-
-    const area=d3.area()
-      .x0(d=>cx-xScale(d[1]))
-      .x1(d=>cx+xScale(d[1]))
-      .y(d=>y(d[0]))
-      .curve(d3.curveCatmullRom);
-
-    svg.append('path')
-      .datum(density)
-      .attr('d',area)
-      .attr('fill',color+'44')
-      .attr('stroke',color)
-      .attr('stroke-width',1.5);
-
-    // Median line
-    const med=d3.median(data);
-    svg.append('line')
-      .attr('x1',cx-halfW*0.6).attr('x2',cx+halfW*0.6)
-      .attr('y1',y(med)).attr('y2',y(med))
-      .attr('stroke','#fff').attr('stroke-width',1.5);
-
-    svg.append('text')
-      .attr('x',cx).attr('y',H-pad.b+16)
-      .attr('text-anchor','middle')
-      .attr('font-size',8).attr('fill','#5a6a7a')
-      .attr('font-family','"Space Mono",monospace')
-      .text(g);
-  });
-
-  // Y axis ticks
-  [0,0.5,1].forEach(v=>{
-    svg.append('text')
-      .attr('x',4).attr('y',y(v)+3)
-      .attr('font-size',7).attr('fill','#3a4a5a')
-      .attr('font-family','"Space Mono",monospace')
-      .text(v.toFixed(1));
-  });
-})();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 5. PCA SCATTER (Canvas)
+// 4. GENRE IDENTITY MAP (Canvas)
 // ═══════════════════════════════════════════════════════════════════════════
 (function buildPCA(){
   document.getElementById('pca-sub').textContent=
-    `PC1 = ${(D.pca.ev[0]*100).toFixed(1)}% variance · PC2 = ${(D.pca.ev[1]*100).toFixed(1)}% · K-Means (k=8) on 7 audio features`;
+    `PC1 = ${(D.pca.ev[0]*100).toFixed(1)}% variance · PC2 = ${(D.pca.ev[1]*100).toFixed(1)}% · Similar genres cluster naturally`;
 
   const rl=document.getElementById('pca-legend');
   GENRES.forEach((g,i)=>{
@@ -766,96 +525,15 @@ Chart.defaults.font.size = 10;
 })();
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 6. FEATURE BAR (Chart.js grouped)
+// Conclusion cards
 // ═══════════════════════════════════════════════════════════════════════════
-(function buildFeatBar(){
-  const feats=['danceability','energy','valence','acousticness'];
-  const fColors=['#1ed760','#ff4757','#ffa502','#3498db'];
-  const labels=GENRES;
-  const datasets=feats.map((f,fi)=>({
-    label:f,
-    data:labels.map(g=>D.feat_bar[g]?D.feat_bar[g][f]:0),
-    backgroundColor:fColors[fi]+'bb',
-    borderColor:fColors[fi],
-    borderWidth:0,
-    borderRadius:2,
-  }));
-  new Chart(document.getElementById('feat-bar-chart'),{
-    type:'bar',
-    data:{labels,datasets},
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#5a6a7a',boxWidth:10,font:{size:9}}}},
-      scales:{
-        x:{ticks:{color:'#5a6a7a'},grid:{display:false}},
-        y:{ticks:{color:'#5a6a7a',stepSize:0.2},grid:{color:'#1d2730'},min:0,max:1}
-      }
-    }
-  });
-})();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 7. POPULARITY BAR (Chart.js horizontal)
-// ═══════════════════════════════════════════════════════════════════════════
-(function buildPopBar(){
-  const entries=Object.entries(D.pop).sort((a,b)=>b[1]-a[1]);
-  const labels=entries.map(e=>e[0]);
-  const vals=entries.map(e=>e[1]);
-  const colors=labels.map(g=>gc[g]||'#fff');
-  new Chart(document.getElementById('pop-bar-chart'),{
-    type:'bar',
-    data:{
-      labels,
-      datasets:[{
-        label:'Avg Popularity',
-        data:vals,
-        backgroundColor:colors.map(c=>c+'bb'),
-        borderColor:colors,
-        borderWidth:0,
-        borderRadius:3,
-      }]
-    },
-    options:{
-      indexAxis:'y',
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false}},
-      scales:{
-        x:{ticks:{color:'#5a6a7a'},grid:{color:'#1d2730'},min:0,max:70},
-        y:{ticks:{color:'#a0b0c0',font:{size:10}},grid:{display:false}}
-      }
-    }
-  });
-})();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// 8. EXPLICIT HISTOGRAM (Chart.js)
-// ═══════════════════════════════════════════════════════════════════════════
-(function buildExplicit(){
-  const bins=Array.from({length:20},(_,i)=>i*5);
-  function hist(data){
-    return bins.map(b=>data.filter(v=>v>=b&&v<b+5).length);
-  }
-  const hE=hist(D.explicit.hist_explicit);
-  const hC=hist(D.explicit.hist_clean);
-  const maxV=Math.max(...hE,...hC);
-  new Chart(document.getElementById('explicit-chart'),{
-    type:'bar',
-    data:{
-      labels:bins.map(b=>b+'–'+(b+5)),
-      datasets:[
-        {label:'Explicit',data:hE,backgroundColor:'#ff475766',borderColor:'#ff4757',borderWidth:0,borderRadius:2},
-        {label:'Clean',   data:hC,backgroundColor:'#3498db44',borderColor:'#3498db',borderWidth:0,borderRadius:2},
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#5a6a7a',boxWidth:10,font:{size:9}}}},
-      scales:{
-        x:{ticks:{color:'#5a6a7a',maxRotation:45,font:{size:8}},grid:{display:false}},
-        y:{ticks:{color:'#5a6a7a'},grid:{color:'#1d2730'}}
-      }
-    }
-  });
+(function buildConclusions(){
+  const corr = D.conclusion.danceability_corr;
+  const strongest = D.conclusion.strongest_pair || {};
+  document.getElementById('c1-text').textContent = `Danceability and popularity have a weak link (${corr}). A song can be popular even if it is not highly danceable.`;
+  document.getElementById('c2-text').textContent = 'Popular songs in each genre have their own pattern. There is no one single formula for a hit.';
+  document.getElementById('c3-text').textContent = `${strongest.a} and ${strongest.b} are the most connected features (|r| = ${strongest.abs_corr}). When one changes, the other usually changes too.`;
+  document.getElementById('c4-text').textContent = `${D.conclusion.most_isolated_genre} is the most different genre in sound compared to others in the PCA map.`;
 })();
 </script>
 </body>
