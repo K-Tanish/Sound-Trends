@@ -175,6 +175,49 @@ def export_dashboard_data():
     out_js.write_text("window.DASH_DATA = " + json.dumps(payload, separators=(",", ":")) + ";", encoding="utf-8")
     print("[OK] dashboard_data.js saved")
 
+    # Compatibility payload for final_dashboard_spotify.html
+    track_cols = [
+        "track_id",
+        "track_name",
+        "artists",
+        "track_genre",
+        "popularity",
+        "danceability",
+        "energy",
+        "speechiness",
+        "acousticness",
+        "instrumentalness",
+        "liveness",
+        "valence",
+    ]
+    tracks_payload = df_focus[track_cols].copy()
+    tracks_payload = tracks_payload.where(pd.notna(tracks_payload), None)
+
+    feature_for_tool = AUDIO_FEATURES
+    centroids = (
+        df_focus.groupby("track_genre")[feature_for_tool]
+        .mean()
+        .reindex(FOCUS_GENRES)
+        .fillna(0.0)
+        .round(4)
+        .to_dict(orient="index")
+    )
+
+    final_payload = {
+        "genres": FOCUS_GENRES,
+        "scatter": scatter_data,
+        "feat6": compare_features,
+        "delta": sound_success["delta"],
+        "corr": payload["corr"],
+        "pca": payload["pca"],
+        "tracks": tracks_payload.to_dict(orient="records"),
+        "centroids": centroids,
+        "features": feature_for_tool,
+    }
+    out_final = OUTPUT_DIR / "final_data.js"
+    out_final.write_text("window.FDATA = " + json.dumps(final_payload, separators=(",", ":")) + ";", encoding="utf-8")
+    print("[OK] final_data.js saved")
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # VIZ 1 — Correlation Heatmap  (Unit III)
@@ -573,7 +616,11 @@ if __name__ == "__main__":
     print(f"\n[OK] All 8 visualizations saved to {OUTPUT_DIR}/")
 
     if args.serve:
-        dashboard_path = OUTPUT_DIR / "spotify_dashboard.html"
+        dashboard_candidates = [
+            OUTPUT_DIR / "final_dashboard_spotify.html",
+            OUTPUT_DIR / "spotify_dashboard.html",
+        ]
+        dashboard_path = next((p for p in dashboard_candidates if p.exists()), dashboard_candidates[0])
         dashboard_url = f"http://127.0.0.1:{args.port}/{dashboard_path.name}"
         handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(OUTPUT_DIR))
         with socketserver.TCPServer(("127.0.0.1", args.port), handler) as httpd:
