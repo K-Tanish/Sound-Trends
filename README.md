@@ -1,75 +1,20 @@
-# Spotify Analytics Dashboard (MLM002)
+# Sound Trends — A Spotify Analytics Dashboard
 
-This project contains a standalone HTML dashboard (`final_dashboard_spotify.html`) that visualizes Spotify audio-feature insights.
+## Description
+Sound Trends is a web-based dashboard that explores patterns in Spotify music through interactive visualizations.
 
-The dashboard’s charts load their data from `final_data.js` (generated). The Python script `spotify_visualizations.py` also writes `dashboard_data.js` for backward compatibility.
+The project focuses on making data easier to understand by turning it into charts and visual insights. It allows you to see how different musical features like popularity, danceability, energy, and mood (valence) vary across songs and genres.
 
-## Prerequisites
+Along with visualization, the project also includes a playlist intelligence feature designed for curators. Instead of creating playlists directly, you could check if the songs aligned with the overall mood you expect the playlist to be of. The system then evaluates a set of tracks based on their Spotify audio features, ranks them by how well they match the desired mood, and highlights outliers so curators could decide which songs to include or exclude,.
 
-1. **Python 3.9+** (recommended)
-2. A **`dataset.csv`** placed in the project folder (`course-project/`).
-3. Internet access (the dashboard loads **Chart.js** and **D3** from CDNs).
+## Tech and Resources Used
+- HTML, CSS, JavaScript — for building the interface and interactions
+- Chart.js — for creating charts and visual components
+- D3.js — for handling data-driven visualizations
+- Python — used to process and prepare the dataset
+- Spotify dataset (CSV) — includes track-level features like genre, popularity, and audio attributes (obtained from kaggle)
 
-### `dataset.csv` columns (minimum)
-
-The generator script expects columns including:
-
-`track_id, track_genre, track_name, artists, danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence, popularity, explicit, tempo, loudness, duration_ms`
-
-## Setup (Windows)
-
-Open PowerShell in the project directory:
-
-```powershell
-cd "c:\Users\Tanish\Desktop\DV_TUT\course-project"
-```
-
-Install required packages (skip `venv`):
-
-```powershell
-pip install pandas numpy matplotlib seaborn scikit-learn plotly
-```
-
-If you get a permissions error, you can install for your user only:
-
-```powershell
-pip install --user pandas numpy matplotlib seaborn scikit-learn plotly
-```
-
-## Generate dashboard data files
-
-Run the generator (this will create `final_data.js`, `dashboard_data.js`, and output visual files in the same folder):
-
-```powershell
-python spotify_visualizations.py
-```
-
-After this finishes, confirm that `final_data.js` exists in the project folder.
-
-## Run the dashboard
-
-### Option A (recommended): serve with a local web server
-
-Start a local server and open the dashboard:
-
-```powershell
-python spotify_visualizations.py --serve --open --port 8000
-```
-
-Then open:
-
-`http://127.0.0.1:8000/final_dashboard_spotify.html`
-
-### Option B: open directly in the browser
-
-If `final_data.js` exists, you can open `final_dashboard_spotify.html` directly in your browser.
-
-Note: serving via HTTP (Option A) avoids potential browser security/CORS quirks with local file loading.
-
-## How it works (quick)
-
-- `spotify_visualizations.py` reads `dataset.csv`, computes aggregates/PCA/correlations, and writes:
-  - `final_data.js` containing `window.FDATA` (used by the current dashboard)
-  - `dashboard_data.js` containing `window.DASH_DATA` (legacy compatibility)
-- `final_dashboard_spotify.html` reads `window.FDATA` and renders the charts with Chart.js (and D3 for the heatmap).
-
+## Working
+- The dataset is first cleaned and structured using Python so that it can be used efficiently in the application.
+- The processed data is then integrated into the frontend using JavaScript, making it ready for visualization.
+- Charts and graphs are generated using Chart.js and D3.js (displayed on the dashboard)
