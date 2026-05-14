@@ -604,7 +604,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
 
-      <div class="row2">
+      <div style="margin-bottom:1.2rem;">
         <div class="card" id="c3-wrapper" title="Double-click to explore the Classical mystery">
           <div id="c3-flipper">
 
@@ -623,59 +623,54 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
 
             <!-- BACK FACE -->
-            <div class="c3-face c3-back">
+            <div class="c3-face c3-back" style="padding:2rem;">
               <!-- header -->
-              <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
-                <div style="font-size:1.4rem;line-height:1;">🎭</div>
+              <div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:24px;">
+                <div style="font-size:1.8rem;line-height:1;">🎭</div>
                 <div style="flex:1;">
-                  <div style="font-size:14px;font-weight:800;color:var(--tx);margin-bottom:2px;">The Classical Mystery</div>
-                  <div style="font-size:11px;color:var(--tx2);line-height:1.5;">Why popular classical tracks have <em style="color:var(--orange);">less</em> instrumentalness than unpopular ones</div>
+                  <div style="font-size:16px;font-weight:800;color:var(--tx);margin-bottom:4px;">The Classical Mystery</div>
+                  <div style="font-size:13px;color:var(--tx2);line-height:1.5;">Why popular classical tracks have <em style="color:var(--orange);">less</em> instrumentalness than unpopular ones</div>
                 </div>
                 <span class="flip-badge" onclick="flipCard3()">✕ close</span>
               </div>
 
-              <!-- visual: vocal % comparison -->
-              <div style="margin-bottom:16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">Vocal / mixed tracks inside each group</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center;">
+                <!-- visual: vocal % comparison -->
+                <div>
+                  <div style="font-size:11px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;">Vocal / mixed tracks inside each group</div>
 
-                <div style="margin-bottom:12px;">
-                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
-                    <span style="font-size:12px;font-weight:700;color:var(--orange);">Hits &nbsp;(top 25%)</span>
-                    <span style="font-size:16px;font-weight:800;color:var(--orange);font-family:var(--mono);">57.5%</span>
+                  <div style="margin-bottom:16px;">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+                      <span style="font-size:13px;font-weight:700;color:var(--orange);">Hits &nbsp;(top 25%)</span>
+                      <span style="font-size:18px;font-weight:800;color:var(--orange);font-family:var(--mono);">57.5%</span>
+                    </div>
+                    <div style="height:14px;background:rgba(255,255,255,.06);border-radius:7px;overflow:hidden;">
+                      <div class="c3-bar-hits" style="height:100%;background:linear-gradient(90deg,var(--orange),#e05f8e);border-radius:7px;"></div>
+                    </div>
+                    <div style="font-size:11px;color:var(--mt);margin-top:6px;">84 of 146 hit tracks are vocal or mixed — Carnatic, bhajans, crossover</div>
                   </div>
-                  <div style="height:12px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
-                    <div class="c3-bar-hits" style="height:100%;background:linear-gradient(90deg,var(--orange),#e05f8e);border-radius:6px;"></div>
+
+                  <div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+                      <span style="font-size:13px;font-weight:600;color:var(--tx2);">Flops (bottom 25%)</span>
+                      <span style="font-size:18px;font-weight:800;color:var(--tx2);font-family:var(--mono);">11.2%</span>
+                    </div>
+                    <div style="height:14px;background:rgba(255,255,255,.06);border-radius:7px;overflow:hidden;">
+                      <div class="c3-bar-flops" style="height:100%;background:rgba(255,255,255,.22);border-radius:7px;"></div>
+                    </div>
+                    <div style="font-size:11px;color:var(--mt);margin-top:6px;">16 of 143 flop tracks are vocal — most are authentically instrumental</div>
                   </div>
-                  <div style="font-size:9px;color:var(--mt);margin-top:3px;">84 of 146 hit tracks are vocal or mixed — Carnatic, bhajans, crossover</div>
                 </div>
 
-                <div style="margin-bottom:4px;">
-                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
-                    <span style="font-size:12px;font-weight:600;color:var(--tx2);">Flops (bottom 25%)</span>
-                    <span style="font-size:16px;font-weight:800;color:var(--tx2);font-family:var(--mono);">11.2%</span>
-                  </div>
-                  <div style="height:12px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
-                    <div class="c3-bar-flops" style="height:100%;background:rgba(255,255,255,.22);border-radius:6px;"></div>
-                  </div>
-                  <div style="font-size:9px;color:var(--mt);margin-top:3px;">16 of 143 flop tracks are vocal — most are authentically instrumental</div>
+                <!-- insight callout -->
+                <div style="background:rgba(232,167,35,.08);border-left:4px solid var(--orange);padding:16px 20px;border-radius:0 8px 8px 0;">
+                  <div style="font-size:13px;color:var(--tx);line-height:1.8;">Popular &ldquo;classical&rdquo; on Spotify is dominated by vocal genres. The flop group is mostly authentic Western instrumental music — giving it a <strong>higher</strong> instrumentalness average. That gap produces the negative delta.</div>
                 </div>
               </div>
-
-              <!-- insight callout -->
-              <div style="background:rgba(232,167,35,.08);border-left:3px solid var(--orange);padding:9px 12px;border-radius:0 6px 6px 0;margin-bottom:14px;">
-                <div style="font-size:11px;color:var(--tx);line-height:1.7;">Popular &ldquo;classical&rdquo; on Spotify is dominated by vocal genres. The flop group is mostly authentic Western instrumental music — giving it a <strong>higher</strong> instrumentalness average. That gap produces the negative delta.</div>
-              </div>
-
 
             </div>
 
           </div>
-        </div>
-        <div class="card">
-          <div class="card-hd"><div class="card-title">Genre Identity Map</div><div class="ctag ctag-p">CHART 4</div></div>
-          <div class="card-sub" id="pca-sub">PCA — similar genres cluster naturally</div>
-          <div style="position:relative;height:300px;"><canvas id="c4"></canvas></div>
-          <div class="leg" id="c4-leg"></div>
         </div>
       </div>
     </div>
@@ -752,10 +747,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="hero-meta">What the data actually says about music, popularity, and genre identity</div>
     </div>
     <div class="page" style="padding-top:1rem;">
-      <div class="conc-grid">
+      <div class="conc-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="conc-card" style="--cc:#1DB954">
           <div class="conc-head">Danceability Myth</div>
-          <div class="conc-body">Danceability and popularity have a weak link (r = 0.064). A song can be popular even if it is not highly danceable. Genre matters far more than individual features.</div>
+          <div class="conc-body">Danceability and popularity have a weak link. A song can be popular even if it is not highly danceable.</div>
         </div>
         <div class="conc-card" style="--cc:#2e77d0">
           <div class="conc-head">Heatmap Reality</div>
@@ -765,16 +760,15 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <div class="conc-head">Success Signature</div>
           <div class="conc-body">Popular songs in each genre have their own pattern. There is no single universal formula for a hit — the Sound of Success is genre-specific and measurable.</div>
         </div>
-        <div class="conc-card" style="--cc:#7c4dbe">
-          <div class="conc-head">Identity Distance</div>
-          <div class="conc-body">Classical is the most sonically isolated genre in the PCA map. Pop and Hip-hop clusters overlap — their sounds are converging, reflecting a real industry trend.</div>
-        </div>
       </div>
       <div style="margin-top:1.5rem;background:var(--s2);border-radius:var(--radius);padding:1.5rem 2rem;">
         <div style="font-size:15px;font-weight:700;margin-bottom:.5rem;">Why This Tool Exists</div>
         <div style="font-size:13px;color:var(--tx2);line-height:1.9;max-width:700px;">
           Audio features are an underused signal in playlist curation. Curators currently rely on gut instinct to match tracks to moods — slow, subjective, hard to justify. The Playlist Intelligence Tool maps each track's sonic profile against a target mood and a genre-specific success blueprint, giving curators a data-backed ranking they can act on and defend. <em style="color:var(--mt)">Limitation acknowledged: sonic fit does not predict virality — marketing, timing, and artist reach remain beyond any audio analysis tool.</em>
         </div>
+      </div>
+      <div style="margin-top:2rem;text-align:right;font-size:12px;color:var(--mt);font-weight:600;font-family:var(--mono);">
+        The data visualizations are 100% pitch-perfect. ~Tanish_K
       </div>
     </div>
   </div>
@@ -898,32 +892,6 @@ Chart.defaults.font.size=10;
   });
 })();
 
-// ═══ CHART 4 — PCA ═══════════════════════════════════════════════════════════
-(function(){
-  document.getElementById('pca-sub').textContent=`PC1 = ${(D.pca.ev[0]*100).toFixed(1)}% variance · PC2 = ${(D.pca.ev[1]*100).toFixed(1)}% · Similar genres cluster naturally`;
-  const rl=document.getElementById('c4-leg');
-  GENRES.forEach((g,i)=>{const it=document.createElement('div');it.className='leg-i';it.innerHTML=`<div class="leg-d" style="background:${COLORS[i]}"></div>${g}`;rl.appendChild(it);});
-  const SAMPLE_RATE = 4;
-  const datasets=GENRES.map((g,i)=>({
-    label:g,
-    data:D.pca.points.filter((p, idx)=>p.track_genre===g && idx % SAMPLE_RATE === 0).map(p=>({x:p.PC1,y:p.PC2})),
-    backgroundColor:COLORS[i]+'77',
-    borderColor:'transparent',
-    pointRadius:3,
-    hoverRadius:6
-  }));
-  new Chart(document.getElementById('c4'),{
-    type:'scatter',data:{datasets},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${datasets[ctx.datasetIndex].label}  PC1:${ctx.parsed.x.toFixed(2)} PC2:${ctx.parsed.y.toFixed(2)}`}}},
-      scales:{
-        x:{title:{display:true,text:`PC1 (${(D.pca.ev[0]*100).toFixed(0)}% var)`,color:'#6a6a6a'},grid:{color:'#282828'}},
-        y:{title:{display:true,text:`PC2 (${(D.pca.ev[1]*100).toFixed(0)}% var)`,color:'#6a6a6a'},grid:{color:'#282828'}}
-      }
-    }
-  });
-})();
 
 // ═══ TOOL ════════════════════════════════════════════════════════════════════
 const sliderTarget={energy:.70,dance:.65,valence:.50};
