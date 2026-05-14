@@ -1,0 +1,20 @@
+# Data files
+dataset.csv
+dashboard_data.js
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Images (if you want to keep them local)
+# *.png
+
+# Logs
+*.log
