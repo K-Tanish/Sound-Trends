@@ -702,9 +702,12 @@ Chart.defaults.font.size=10;
   });
   const rl=document.getElementById('c1-leg');
   GENRES.forEach((g,i)=>{const it=document.createElement('div');it.className='leg-i';it.innerHTML=`<div class="leg-d" style="background:${COLORS[i]}"></div>${g}`;rl.appendChild(it);});
+  const SAMPLE_RATE = 4; // Only show 1 out of every 4 points to reduce clutter
   const datasets=()=>GENRES.filter(g=>active.has(g)).map((g)=>{
     const gi=GENRES.indexOf(g);
-    const pts=D.scatter.filter(p=>p.track_genre===g).map(p=>({x:p.danceability,y:p.popularity,r:Math.max(2,p.popularity*.04+2),_p:p}));
+    const pts=D.scatter
+      .filter((p, i)=> p.track_genre===g && i % SAMPLE_RATE === 0)
+      .map(p=>({x:p.danceability,y:p.popularity,r:Math.max(2,p.popularity*.04+2),_p:p}));
     return{label:g,data:pts,backgroundColor:COLORS[gi]+'88',borderColor:'transparent',borderWidth:0,pointRadius:pts.map(p=>p.r),hoverRadius:8};
   });
   const chart=new Chart(document.getElementById('c1'),{
@@ -773,7 +776,15 @@ Chart.defaults.font.size=10;
   document.getElementById('pca-sub').textContent=`PC1 = ${(D.pca.ev[0]*100).toFixed(1)}% variance · PC2 = ${(D.pca.ev[1]*100).toFixed(1)}% · Similar genres cluster naturally`;
   const rl=document.getElementById('c4-leg');
   GENRES.forEach((g,i)=>{const it=document.createElement('div');it.className='leg-i';it.innerHTML=`<div class="leg-d" style="background:${COLORS[i]}"></div>${g}`;rl.appendChild(it);});
-  const datasets=GENRES.map((g,i)=>({label:g,data:D.pca.points.filter(p=>p.track_genre===g).map(p=>({x:p.PC1,y:p.PC2})),backgroundColor:COLORS[i]+'77',borderColor:'transparent',pointRadius:3,hoverRadius:6}));
+  const SAMPLE_RATE = 4;
+  const datasets=GENRES.map((g,i)=>({
+    label:g,
+    data:D.pca.points.filter((p, idx)=>p.track_genre===g && idx % SAMPLE_RATE === 0).map(p=>({x:p.PC1,y:p.PC2})),
+    backgroundColor:COLORS[i]+'77',
+    borderColor:'transparent',
+    pointRadius:3,
+    hoverRadius:6
+  }));
   new Chart(document.getElementById('c4'),{
     type:'scatter',data:{datasets},
     options:{
