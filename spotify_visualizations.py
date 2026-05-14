@@ -81,6 +81,11 @@ def export_dashboard_data():
     for genre, grp in df_focus.groupby("track_genre"):
         if genre not in FOCUS_GENRES:
             continue
+        # Exclude zero-popularity tracks: they are unlisted/unplayed entries,
+        # not real "flops", and would distort the bottom-quartile average.
+        grp = grp[grp["popularity"] > 0].copy()
+        if len(grp) < 20:
+            continue
         q25 = grp["popularity"].quantile(0.25)
         q75 = grp["popularity"].quantile(0.75)
         bot = grp[grp["popularity"] <= q25]

@@ -437,6 +437,53 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);box-shadow:0 
 
 /* noise overlay */
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+
+/* ── CHART 3 FLIP CARD ────────────────────────────────────────────────────── */
+#c3-wrapper{
+  background:transparent!important;
+  padding:0!important;
+  perspective:1200px;
+  transform:none!important;
+  box-shadow:none!important;
+  cursor:default;
+}
+#c3-wrapper:hover{background:transparent!important;transform:none!important;box-shadow:none!important;}
+#c3-flipper{
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .65s cubic-bezier(.4,0,.2,1);
+}
+#c3-wrapper.flipped #c3-flipper{transform:rotateY(180deg);}
+.c3-face{
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  background:var(--s2);
+  border-radius:var(--radius);
+  padding:1.3rem;
+  transition:background .2s;
+}
+.c3-face:hover{background:#1f1f1f;}
+.c3-back{
+  position:absolute;
+  inset:0;
+  transform:rotateY(180deg);
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+}
+.flip-badge{
+  font-size:9px;color:var(--mt);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:2px 8px;font-family:var(--mono);
+  letter-spacing:.04em;cursor:pointer;transition:all .2s;user-select:none;
+  white-space:nowrap;flex-shrink:0;
+}
+.flip-badge:hover{color:var(--orange);border-color:var(--orange);}
+@keyframes barHits  {from{width:0}to{width:57.5%}}
+@keyframes barFlops {from{width:0}to{width:11.2%}}
+.c3-bar-hits  {animation:barHits  .9s ease .7s  both;}
+.c3-bar-flops {animation:barFlops .9s ease .85s both;}
+@keyframes pulseDot{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.flip-dot{width:5px;height:5px;border-radius:50%;background:var(--orange);animation:pulseDot 1.8s ease-in-out infinite;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -558,10 +605,71 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
 
       <div class="row2">
-        <div class="card">
-          <div class="card-hd"><div class="card-title">The Sound of Success</div><div class="ctag ctag-o">CHART 3</div></div>
-          <div class="card-sub">Top 25% vs Bottom 25% — feature delta separating hits from flops</div>
-          <div style="position:relative;height:300px;"><canvas id="c2"></canvas></div>
+        <div class="card" id="c3-wrapper" title="Double-click to explore the Classical mystery">
+          <div id="c3-flipper">
+
+            <!-- FRONT FACE -->
+            <div class="c3-face">
+              <div class="card-hd">
+                <div class="card-title">The Sound of Success</div>
+                <div class="ctag ctag-o">CHART 3</div>
+                <div class="cnote" style="display:flex;align-items:center;gap:6px;margin-left:auto;">
+                  <div class="flip-dot"></div>
+                  <span class="flip-badge" onclick="flipCard3()">double-click to explore</span>
+                </div>
+              </div>
+              <div class="card-sub">Top 25% vs Bottom 25% — feature delta separating hits from flops</div>
+              <div style="position:relative;height:300px;"><canvas id="c2"></canvas></div>
+            </div>
+
+            <!-- BACK FACE -->
+            <div class="c3-face c3-back">
+              <!-- header -->
+              <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;">
+                <div style="font-size:1.4rem;line-height:1;">🎭</div>
+                <div style="flex:1;">
+                  <div style="font-size:14px;font-weight:800;color:var(--tx);margin-bottom:2px;">The Classical Mystery</div>
+                  <div style="font-size:11px;color:var(--tx2);line-height:1.5;">Why popular classical tracks have <em style="color:var(--orange);">less</em> instrumentalness than unpopular ones</div>
+                </div>
+                <span class="flip-badge" onclick="flipCard3()">✕ close</span>
+              </div>
+
+              <!-- visual: vocal % comparison -->
+              <div style="margin-bottom:16px;">
+                <div style="font-size:10px;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">Vocal / mixed tracks inside each group</div>
+
+                <div style="margin-bottom:12px;">
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+                    <span style="font-size:12px;font-weight:700;color:var(--orange);">Hits &nbsp;(top 25%)</span>
+                    <span style="font-size:16px;font-weight:800;color:var(--orange);font-family:var(--mono);">57.5%</span>
+                  </div>
+                  <div style="height:12px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
+                    <div class="c3-bar-hits" style="height:100%;background:linear-gradient(90deg,var(--orange),#e05f8e);border-radius:6px;"></div>
+                  </div>
+                  <div style="font-size:9px;color:var(--mt);margin-top:3px;">84 of 146 hit tracks are vocal or mixed — Carnatic, bhajans, crossover</div>
+                </div>
+
+                <div style="margin-bottom:4px;">
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+                    <span style="font-size:12px;font-weight:600;color:var(--tx2);">Flops (bottom 25%)</span>
+                    <span style="font-size:16px;font-weight:800;color:var(--tx2);font-family:var(--mono);">11.2%</span>
+                  </div>
+                  <div style="height:12px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;">
+                    <div class="c3-bar-flops" style="height:100%;background:rgba(255,255,255,.22);border-radius:6px;"></div>
+                  </div>
+                  <div style="font-size:9px;color:var(--mt);margin-top:3px;">16 of 143 flop tracks are vocal — most are authentically instrumental</div>
+                </div>
+              </div>
+
+              <!-- insight callout -->
+              <div style="background:rgba(232,167,35,.08);border-left:3px solid var(--orange);padding:9px 12px;border-radius:0 6px 6px 0;margin-bottom:14px;">
+                <div style="font-size:11px;color:var(--tx);line-height:1.7;">Popular &ldquo;classical&rdquo; on Spotify is dominated by vocal genres. The flop group is mostly authentic Western instrumental music — giving it a <strong>higher</strong> instrumentalness average. That gap produces the negative delta.</div>
+              </div>
+
+
+            </div>
+
+          </div>
         </div>
         <div class="card">
           <div class="card-hd"><div class="card-title">Genre Identity Map</div><div class="ctag ctag-p">CHART 4</div></div>
@@ -760,7 +868,7 @@ Chart.defaults.font.size=10;
       plugins:{legend:{labels:{color:'#6a6a6a',boxWidth:8,font:{size:8}}}},
       scales:{
         x:{ticks:{color:'#6a6a6a',maxRotation:30},grid:{display:false}},
-        y:{title:{display:true,text:'Top quartile − Bottom quartile',color:'#6a6a6a',font:{size:8}},ticks:{color:'#6a6a6a'},grid:{color:'#282828'},min:-0.2,max:0.2}
+        y:{title:{display:true,text:'Top quartile − Bottom quartile',color:'#6a6a6a',font:{size:8}},ticks:{color:'#6a6a6a'},grid:{color:'#282828'},suggestedMin:-0.2,suggestedMax:0.2}
       }
     }
   });
@@ -971,6 +1079,26 @@ function runAnalysis(){
     rg.appendChild(card);
   });
 }
+
+// ── CHART 3 FLIP ─────────────────────────────────────────────────────────────
+function flipCard3(){
+  const wrapper = document.getElementById('c3-wrapper');
+  const goingBack = !wrapper.classList.contains('flipped');
+  wrapper.classList.toggle('flipped');
+  if(goingBack){
+    // Re-trigger bar animations each time the back is revealed
+    setTimeout(()=>{
+      ['c3-bar-hits','c3-bar-flops'].forEach(cls=>{
+        const el=document.querySelector('.'+cls);
+        if(!el)return;
+        el.style.animation='none';
+        el.offsetHeight; // force reflow
+        el.style.animation='';
+      });
+    },680);
+  }
+}
+document.getElementById('c3-wrapper').addEventListener('dblclick',flipCard3);
 
 </script>
 </body>
