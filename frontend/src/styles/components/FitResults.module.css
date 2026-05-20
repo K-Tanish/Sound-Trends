@@ -1,0 +1,226 @@
+.resultsArea {
+  min-height: 300px;
+}
+
+.resultsEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  gap: 14px;
+}
+
+.resultsEmptyIcon {
+  font-size: 3.5rem;
+  opacity: .25;
+}
+
+.resultsEmptyTxt {
+  font-size: 14px;
+  color: var(--mt);
+  text-align: center;
+  line-height: 2;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.resultsTitle {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.resultsMeta {
+  font-size: 11px;
+  color: var(--mt);
+  font-family: var(--mono);
+}
+
+.resultsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Vibe Summary Alert */
+.vibeSummary {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Track Card */
+.rc {
+  background: var(--s2);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  transition: background .15s, transform .15s, box-shadow .15s;
+  animation: fadeUp .3s ease both;
+}
+
+.rc:hover {
+  background: var(--s3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+}
+
+.rcRank {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  color: var(--mt);
+  text-align: center;
+}
+
+.rcRank.top {
+  color: var(--green);
+}
+
+.rcName {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.rcArtist {
+  font-size: 12px;
+  color: var(--tx2);
+  margin-bottom: 6px;
+}
+
+.rcTags {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rcInsight {
+  font-size: 11px;
+  color: var(--tx2);
+  margin-top: 6px;
+  line-height: 1.6;
+  max-width: 360px;
+  font-family: var(--mono);
+}
+
+.rcInsight em {
+  font-style: normal;
+}
+
+.rcRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Circular Gauge */
+.scoreRing {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.scoreLbl {
+  font-size: 8px;
+  color: var(--mt);
+  text-align: center;
+  letter-spacing: .06em;
+  font-family: var(--mono);
+}
+
+/* Feature Bars inside card */
+.featBars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 110px;
+}
+
+.fbRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fbLbl {
+  font-size: 9px;
+  color: var(--mt);
+  width: 46px;
+  text-align: right;
+  flex-shrink: 0;
+  font-family: var(--mono);
+}
+
+.fbTrack {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, .08);
+  border-radius: 2px;
+  position: relative;
+}
+
+.fbFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .6s ease;
+}
+
+.fbTarget {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 9px;
+  background: #fff;
+  border-radius: 1px;
+  opacity: .5;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .rc {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .rcRank {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  .rcName {
+    max-width: 100%;
+  }
+  .rcInsight {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .rcTags {
+    justify-content: center;
+  }
+  .rcRight {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+  }
+}

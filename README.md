@@ -1,20 +1,43 @@
-# Sound Trends — A Spotify Analytics Dashboard
+# Sound Trends — Spotify Analytics & Playlist Curator
 
-## Description
-Sound Trends is a web-based dashboard that explores patterns in Spotify music through interactive visualizations.
+An interactive data-science web application exploring Spotify audio patterns, genre fingerprints, and automated playlist compatibility curation.
 
-The project focuses on making data easier to understand by turning it into charts and visual insights. It allows you to see how different musical features like popularity, danceability, energy, and mood (valence) vary across songs and genres.
+## Features
+1. **The Popularity Myth**: Active scatter plot checking the correlation between danceability and popularity across focus genres.
+2. **Feature Correlation Heatmap**: D3-driven interactive matrix plotting Pearson $r$ correlations between acoustic features.
+3. **The Sound of Success**: A grouped bar chart tracking top vs bottom quartile feature deltas separating hits from flops. Features an interactive 3D flip card detailing "The Classical Paradox".
+4. **Playlist Intelligence Curator**: A curator utility ranking tracks against slider target profiles and genre-specific centroids.
 
-Along with visualization, the project also includes a playlist intelligence feature designed for curators. Instead of creating playlists directly, you could check if the songs aligned with the overall mood you expect the playlist to be of. The system then evaluates a set of tracks based on their Spotify audio features, ranks them by how well they match the desired mood, and highlights outliers so curators could decide which songs to include or exclude,.
+## Architecture
+The application has been rebuilt using a modular React + TypeScript architecture:
+- **Frontend**: Vite + React + TypeScript + Vanilla CSS Modules.
+- **Visuals**: Chart.js (`react-chartjs-2`) for bubble & bar charts; D3.js for SVG heatmap rendering.
+- **Data Engineering**: [spotify_visualizations.py](file:///c:/Users/Tanish/Desktop/OPEN_SRC/Sound-Trends/spotify_visualizations.py) processes the raw `dataset.csv` and outputs `final_data.js` containing pre-computed centroids and dimensions.
 
-## Tech and Resources Used
-- HTML, CSS, JavaScript — for building the interface and interactions
-- Chart.js — for creating charts and visual components
-- D3.js — for handling data-driven visualizations
-- Python — used to process and prepare the dataset
-- Spotify dataset (CSV) — includes track-level features like genre, popularity, and audio attributes (obtained from kaggle)
+## Getting Started
 
-## Working
-- The dataset is first cleaned and structured using Python so that it can be used efficiently in the application.
-- The processed data is then integrated into the frontend using JavaScript, making it ready for visualization.
-- Charts and graphs are generated using Chart.js and D3.js (displayed on the dashboard)
+### Prerequisites
+- Node.js (v18+)
+- npm (v10+)
+
+### Installation & Run Dev
+1. Navigate into the frontend workspace:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run local Vite dev server:
+   ```bash
+   npm run dev
+   ```
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+---
+*Developed with a pixel-perfect Spotify design language system. Watermark by ~Tanish_K.*
+

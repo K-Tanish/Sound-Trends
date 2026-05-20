@@ -1,0 +1,297 @@
+.panel {
+  background: var(--s2);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--tx);
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.panelLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--tx2);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+
+.panelSection {
+  margin-bottom: 1.4rem;
+}
+
+/* Vibe presets */
+.vibePresets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.vibeBtn {
+  background: var(--s2);
+  border: 1px solid #333;
+  color: var(--mt);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vibeBtn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.vibeBtnActive {
+  background: var(--green);
+  border-color: var(--green);
+  color: #000;
+  font-weight: 700;
+}
+
+/* Slider Controls */
+.sliderRow {
+  margin-bottom: 14px;
+}
+
+.sliderHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.sliderName {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sliderVal {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  font-family: var(--mono);
+}
+
+.rangeInput {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--b2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--green);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.rangeInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(29, 185, 84, .2);
+}
+
+/* Select Genre Dropdown */
+.genreSelect {
+  width: 100%;
+  background: var(--s3);
+  border: none;
+  color: var(--tx);
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.genreSelect:focus {
+  outline: 2px solid var(--green);
+}
+
+/* Search Dropdown */
+.searchWrap {
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  background: var(--s3);
+  border: none;
+  color: var(--tx);
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-family: var(--font);
+  font-size: 13px;
+  outline: none;
+  transition: box-shadow .2s;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 0 2px var(--green);
+}
+
+.searchInput::placeholder {
+  color: var(--mt);
+}
+
+.searchDrop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--s3);
+  border-radius: var(--radius);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .6);
+}
+
+.searchItem {
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+  transition: background .1s;
+}
+
+.searchItem:hover {
+  background: var(--b2);
+}
+
+.searchItem:last-child {
+  border-bottom: none;
+}
+
+.siName {
+  color: var(--tx);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.siArtist {
+  color: var(--tx2);
+  font-size: 11px;
+  margin-top: 1px;
+}
+
+.siGenre {
+  display: inline-block;
+  font-size: 9px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+/* Selected Track Chips */
+.chips {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 20px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--s3);
+  border-radius: 20px;
+  padding: 7px 12px;
+  font-size: 12px;
+  transition: background .1s;
+}
+
+.chip:hover {
+  background: var(--b2);
+}
+
+.chipName {
+  color: var(--tx);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.chipRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.chipGenre {
+  font-size: 10px;
+  color: var(--tx2);
+}
+
+.chipRm {
+  cursor: pointer;
+  color: var(--mt);
+  font-size: 16px;
+  line-height: 1;
+  transition: color .15s;
+}
+
+.chipRm:hover {
+  color: var(--red);
+}
+
+.emptyChips {
+  font-size: 12px;
+  color: var(--mt);
+  text-align: center;
+  padding: 12px 0;
+}
+
+/* Analysis Button */
+.analyseBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  background: var(--green);
+  color: #000;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+  margin-top: 4px;
+}
+
+.analyseBtn:hover {
+  background: var(--green-h);
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(29, 185, 84, .35);
+}
+
+.analyseBtn:disabled {
+  background: var(--b2);
+  color: var(--mt);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

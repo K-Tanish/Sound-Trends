@@ -1,0 +1,102 @@
+.main {
+  margin-left: var(--sidebar);
+  flex: 1;
+  min-height: 100vh;
+  transition: background .6s ease;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 3rem;
+}
+
+/* Hero Section */
+.hero {
+  padding: 2.5rem 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heroEyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--tx2);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.0;
+  margin-bottom: .5rem;
+}
+
+.heroTitle em {
+  color: var(--green);
+  font-style: normal;
+}
+
+.heroMeta {
+  font-size: 13px;
+  color: var(--tx2);
+  font-weight: 400;
+}
+
+/* Grid Layout for Playlist tool screen */
+.toolLayout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Conclusions grid */
+.concGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.concCard {
+  background: var(--s2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  border-top: 3px solid var(--cc, var(--green));
+  transition: background .2s, transform .18s, box-shadow .18s;
+}
+
+.concCard:hover {
+  background: var(--s3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+}
+
+.concHead {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--cc, var(--green));
+  margin-bottom: 8px;
+}
+
+.concBody {
+  font-size: 12px;
+  color: var(--tx2);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .toolLayout {
+    grid-template-columns: 1fr;
+  }
+  .concGrid {
+    grid-template-columns: 1fr;
+  }
+}

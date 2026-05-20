@@ -1,0 +1,263 @@
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.card {
+  background: var(--s2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  transition: background .2s, transform .18s, box-shadow .18s;
+  overflow: hidden;
+}
+
+.card:hover {
+  background: #1f1f1f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
+}
+
+.cardHd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.ctag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: .1em;
+  font-family: var(--mono);
+}
+
+.ctagG {
+  background: rgba(29, 185, 84, .12);
+  color: var(--green);
+  border: 1px solid rgba(29, 185, 84, .25);
+}
+
+.ctagB {
+  background: rgba(46, 119, 208, .12);
+  color: var(--blue);
+  border: 1px solid rgba(46, 119, 208, .25);
+}
+
+.ctagO {
+  background: rgba(232, 167, 35, .12);
+  color: var(--orange);
+  border: 1px solid rgba(232, 167, 35, .25);
+}
+
+.cardSub {
+  font-size: 12px;
+  color: var(--tx2);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.cnote {
+  font-size: 11px;
+  color: var(--mt);
+  margin-left: auto;
+  font-family: var(--mono);
+}
+
+/* Filter pills in scatter chart */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+.pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--b1);
+  color: var(--tx2);
+  transition: all .15s;
+  background: transparent;
+  user-select: none;
+}
+
+.pill:hover {
+  border-color: var(--b2);
+  color: var(--tx);
+  background: var(--s3);
+}
+
+.pillOn {
+  color: #000 !important;
+  border-color: transparent !important;
+  font-weight: 700;
+}
+
+/* Chart legends */
+.leg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.legItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--tx2);
+}
+
+.legDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Correlation Heatmap Scrollable container */
+.heatmapContainer {
+  overflow-x: auto;
+}
+
+/* Flip Card Success Chart (Chart 3) styling */
+.c3Wrapper {
+  background: transparent !important;
+  padding: 0 !important;
+  perspective: 1200px;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+.c3Wrapper:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.c3Flipper {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .65s cubic-bezier(.4, 0, .2, 1);
+  width: 100%;
+  height: 100%;
+}
+
+.c3Wrapper.flipped .c3Flipper {
+  transform: rotateY(180deg);
+}
+
+.c3Face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--s2);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  transition: background .2s;
+  width: 100%;
+  height: 100%;
+}
+
+.c3Face:hover {
+  background: #1f1f1f;
+}
+
+.c3Back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.flipBadge {
+  font-size: 9px;
+  color: var(--mt);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-family: var(--mono);
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .2s;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.flipBadge:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.flipDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulseDot 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Classical music details bars in card back */
+.barContainer {
+  height: 14px;
+  background: rgba(255, 255, 255, .06);
+  border-radius: 7px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.c3BarHits {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), #e05f8e);
+  border-radius: 7px;
+  width: 0;
+}
+
+.c3BarFlops {
+  height: 100%;
+  background: rgba(255, 255, 255, .22);
+  border-radius: 7px;
+  width: 0;
+}
+
+.c3Wrapper.flipped .c3BarHits {
+  animation: barHits .9s ease .7s both;
+}
+
+.c3Wrapper.flipped .c3BarFlops {
+  animation: barFlops .9s ease .85s both;
+}
+
+@keyframes barHits {
+  from { width: 0; }
+  to { width: 57.5%; }
+}
+
+@keyframes barFlops {
+  from { width: 0; }
+  to { width: 11.2%; }
+}
+
+@media (max-width: 900px) {
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+}
