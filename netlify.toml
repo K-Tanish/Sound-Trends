@@ -1,0 +1,15 @@
+[build]
+  # The base directory containing our Vite + React + TS project
+  base = "frontend"
+
+  # The build command Netlify will run to compile our application
+  command = "npm run build"
+
+  # The output folder to serve (relative to the base directory)
+  publish = "dist"
+
+# Redirect rule to handle React routing/reloading cleanly on subpaths
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
