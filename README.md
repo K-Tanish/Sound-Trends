@@ -1,6 +1,6 @@
 # Sound Trends — Spotify Analytics & Playlist Curator
 
-An interactive data-science web application exploring Spotify audio patterns, genre fingerprints, and automated playlist compatibility curation.
+An interactive data-science web app exploring Spotify audio patterns, genre fingerprints, and features automated playlist compatibility curation.
 
 ## Features
 1. **The Popularity Myth**: Active scatter plot checking the correlation between danceability and popularity across focus genres.
