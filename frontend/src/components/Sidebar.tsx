@@ -60,24 +60,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         Conclusions
       </button>
 
-      {/* Standalone Link targeting interactive bubble map */}
-      <a
-        className={styles.item}
-        href="/viz7_interactive_bubble.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <svg className={styles.icon} viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-        </svg>
-        Interactive Bubble Map ↗
-      </a>
-
-      <div className={styles.divider}></div>
-      <div className={styles.section}>Genres</div>
+   
+      
 
       {GENRES.map((g) => (
-        <div key={g} className={styles.item} style={{ fontSize: '12px', padding: '7px 12px', cursor: 'default' }}>
+        <div key={g} className={styles.item} style={{ fontSize: '12px', padding: '10px 30px', cursor: 'default' }}>
           <div className={styles.dot} style={{ backgroundColor: genreColorMap[g] }}></div>
           {g}
         </div>
