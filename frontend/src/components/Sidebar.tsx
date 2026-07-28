@@ -60,9 +60,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         Conclusions
       </button>
 
-   
+      <div className={styles.divider}></div>
+      <div className={styles.section}>Genres</div>
       
-
       {GENRES.map((g) => (
         <div key={g} className={styles.item} style={{ fontSize: '12px', padding: '10px 30px', cursor: 'default' }}>
           <div className={styles.dot} style={{ backgroundColor: genreColorMap[g] }}></div>
